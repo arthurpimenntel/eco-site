@@ -100,8 +100,12 @@ nav {
 }
 
 .logo {
-  width: 130px;
+  width: 260px;
   filter: drop-shadow(0 0 10px var(--green-glow));
+  margin-top: 50px;
+}
+
+.nav-links {
 }
 
 /* Logo dentro do home-content — oculta no desktop */
