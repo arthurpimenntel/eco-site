@@ -1,0 +1,794 @@
+/* ================================
+   RESET & VARIÁVEIS
+================================ */
+:root {
+  --green:        #b8ff00;
+  --green-glow:   rgba(184, 255, 0, 0.5);
+  --green-dim:    rgba(184, 255, 0, 0.15);
+  --green-border: rgba(184, 255, 0, 0.25);
+  --dark:         #060a00;
+  --card-bg:      rgba(184, 255, 0, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base: sem travas de overflow — o JS aplica .no-scroll só na home */
+html, body {
+  height: auto;
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Space Mono', monospace;
+  color: white;
+  background: var(--dark);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Trava de scroll aplicada SOMENTE enquanto a home está ativa */
+body.no-scroll {
+  overflow: hidden !important;
+  height: 100dvh;
+}
+
+/* ================================
+   FUNDO DE VÍDEO
+================================ */
+.video-background {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.bg-video.visible {
+  opacity: 1;
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(6,10,0,0.55) 0%,
+    rgba(6,10,0,0.25) 40%,
+    rgba(6,10,0,0.65) 100%
+  );
+}
+
+/* ================================
+   PARTÍCULAS
+================================ */
+#particles {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ================================
+   NAVEGAÇÃO
+================================ */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 2px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background: linear-gradient(to bottom, rgba(6,10,0,0.80) 0%, transparent 100%);
+  height: 60px;
+}
+
+.logo {
+  width: 130px;
+  filter: drop-shadow(0 0 10px var(--green-glow));
+}
+
+/* Logo dentro do home-content — oculta no desktop */
+.home-logo {
+  display: none;
+}
+
+.nav-links a {
+  margin-left: 24px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  transition: color 0.2s, text-shadow 0.2s;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: var(--green);
+  text-shadow: 0 0 12px var(--green-glow);
+}
+
+/* ================================
+   MENU HAMBURGUER MOBILE
+================================ */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 8px;
+  -webkit-tap-highlight-color: transparent;
+  margin-top: -2px;
+  position: relative;
+  z-index: 3000;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  background: rgba(6,10,0,0.97);
+  padding: 8px 0;
+  z-index: 2000;
+  flex-direction: column;
+  border-bottom: 1px solid var(--green-border);
+}
+
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a {
+  display: block;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.mobile-menu a:active {
+  background: rgba(184,255,0,0.08);
+  color: var(--green);
+}
+
+/* ================================
+   PÁGINAS
+================================ */
+.page {
+  display: none;
+  min-height: 100vh;
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.page.active { display: block; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page-inner {
+  padding: 80px 40px 80px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 10px;
+  color: white;
+  text-shadow: 0 0 30px var(--green-glow);
+}
+
+.page-desc {
+  text-align: center;
+  color: rgba(255,255,255,0.45);
+  font-size: 0.82rem;
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin: 44px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--green-border);
+}
+
+/* ================================
+   HOME — DESKTOP
+================================ */
+#home {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  text-align: center;
+}
+
+#home.active { display: flex; }
+
+.home-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 16px 20px 16px;
+  width: 100%;
+}
+
+/* No desktop, .home-body é transparente — age como se não existisse */
+.home-body {
+  display: contents;
+}
+
+.home-subtitle {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--green);
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.home-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(3rem, 12vw, 8rem);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: white;
+  text-shadow:
+    0 0 40px rgba(184,255,0,0.5),
+    0 0 90px rgba(184,255,0,0.15);
+}
+
+.home-tagline {
+  font-size: clamp(0.65rem, 2vw, 0.85rem);
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  max-width: 480px;
+}
+
+/* CONTAGEM REGRESSIVA */
+#countdown {
+  display: flex;
+  gap: 24px;
+  margin: 0;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.countdown-item span {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.6rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--green);
+  line-height: 1;
+  text-shadow: 0 0 20px var(--green-glow);
+}
+
+.countdown-item small {
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+}
+
+/* BOTÕES HOME */
+.home-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 4px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.btn-primary {
+  background: var(--green);
+  color: #0a1200;
+  box-shadow: 0 0 22px rgba(184,255,0,0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 40px rgba(184,255,0,0.6);
+}
+
+.btn-whatsapp {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+.btn-whatsapp:hover {
+  border-color: var(--green);
+  color: var(--green);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(184,255,0,0.2);
+}
+
+.btn-community {
+  background: transparent;
+  color: var(--green);
+  border: 1px solid var(--green-border);
+  margin-top: 0;
+}
+
+.btn-community:hover {
+  border-color: var(--green);
+  box-shadow: 0 0 20px rgba(184,255,0,0.2);
+  transform: translateY(-2px);
+}
+
+/* ================================
+   GRID DE CARDS
+================================ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  padding: 22px 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--green-border);
+  border-radius: 6px;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: white;
+}
+
+.card span {
+  font-size: 0.72rem;
+  color: var(--green);
+  opacity: 0.85;
+}
+
+.card small {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 2px;
+}
+
+.card:hover {
+  transform: scale(1.04);
+  border-color: var(--green);
+  box-shadow: 0 0 20px rgba(184,255,0,0.12);
+}
+
+.card-link {
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.card-link::after {
+  content: "💬 WhatsApp";
+  position: absolute;
+  bottom: 10px;
+  right: 14px;
+  font-size: 0.58rem;
+  color: var(--green);
+  opacity: 0;
+  transition: opacity 0.2s;
+  letter-spacing: 0.05em;
+}
+
+.card-link:hover::after { opacity: 1; }
+
+.card-link strong {
+  font-size: 0.82rem;
+  color: white;
+  font-weight: 700;
+}
+
+.card-insta {
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  justify-content: center;
+  text-align: center;
+}
+
+.card-insta::after {
+  content: "📷 Instagram";
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-size: 0.58rem;
+  color: var(--green);
+  opacity: 0;
+  transition: opacity 0.2s;
+  letter-spacing: 0.05em;
+}
+
+.card-insta:hover::after { opacity: 1; }
+
+/* ================================
+   GALERIA
+================================ */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.gallery-item {
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid var(--green-border);
+  aspect-ratio: 4/3;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gallery-item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 24px rgba(184,255,0,0.22);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+  display: block;
+}
+
+.gallery-item:hover img { transform: scale(1.08); }
+
+/* ================================
+   LIGHTBOX
+================================ */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.93);
+  z-index: 9000;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox.open { display: flex; }
+
+.lightbox img {
+  max-width: 88vw;
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 6px;
+  border: 1px solid var(--green-border);
+}
+
+.close {
+  position: absolute;
+  top: 70px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  line-height: 1;
+  color: white;
+  cursor: pointer;
+  background: rgba(0,0,0,0.65);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  z-index: 9001;
+  transition: background 0.2s, transform 0.15s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.close:hover {
+  background: rgba(184,255,0,0.18);
+  transform: scale(1.1);
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  z-index: 9001;
+}
+
+.prev:hover, .next:hover { opacity: 1; }
+.prev { left: 20px; }
+.next { right: 20px; }
+
+/* ================================
+   PLAYER
+================================ */
+#player-area {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 200;
+}
+
+#playButton {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  background: rgba(6,10,0,0.75);
+  border: 1px solid var(--green-border);
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.12s, color 0.12s, box-shadow 0.12s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+#btn-prev, #btn-next {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  background: rgba(6,10,0,0.65);
+  border: 1px solid var(--green-border);
+  border-radius: 50%;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+#btn-prev:hover, #btn-next:hover {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+#playButton.beat {
+  transform: scale(1.28);
+  color: var(--green);
+  box-shadow: 0 0 18px var(--green-glow);
+}
+
+#track-label {
+  position: fixed;
+  bottom: 80px;
+  right: 24px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  text-align: right;
+  width: 138px;
+  overflow: hidden;
+  z-index: 200;
+  pointer-events: none;
+}
+
+#track-label span {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 8s linear infinite alternate;
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(calc(-100% + 138px)); }
+}
+
+/* ================================
+   RODAPÉ
+================================ */
+footer {
+  text-align: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  width: 100%;
+  padding: 20px 0 14px;
+  margin: 0;
+}
+
+footer span {
+  color: var(--green);
+  opacity: 0.6;
+}
+
+/* Footer da home: rodapé fixo dentro da tela */
+#home footer {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+}
+
+/* ================================
+   RESPONSIVO MOBILE
+================================ */
+@media (max-width: 680px) {
+  .nav-links   { display: none; }
+  .menu-toggle { display: block; }
+
+  nav .logo { display: none; }
+
+  /* ---- HOME MOBILE: layout com position absolute ---- */
+
+  /* #home vira um container relativo que ocupa toda a tela */
+  #home {
+    display: none;
+    position: relative;
+    height: 100dvh;
+    min-height: 100dvh;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  #home.active {
+    display: block;   /* block, não flex — filhos usam position absolute */
+  }
+
+  /* .home-content some como container — filhos diretos tomam conta */
+  .home-content {
+    display: contents;
+  }
+
+  /* LOGO: colada bem perto do topo, logo abaixo da nav */
+  .home-logo {
+    display: block;
+    position: absolute;
+    top: -50px;          /* nav=60px + 6px de respiro */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    filter: drop-shadow(0 0 14px var(--green-glow));
+  }
+
+  /* CORPO: começa logo abaixo da logo (~66+160+10 = 236px) */
+  .home-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    top: 250px;
+    left: 20px;
+    right: 20px;
+  }
+
+  .home-buttons {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .btn-community { width: 100%; justify-content: center; }
+
+  .home-title    { display: none; }
+
+  .home-subtitle {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+  }
+
+  #countdown { gap: 12px; }
+
+  /* Footer da home no mobile */
+  #home footer {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    z-index: 10;
+  }
+
+  /* Páginas internas */
+  .page-inner { padding: 70px 16px 80px; }
+
+  .grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Player acima do footer */
+  #player-area { bottom: 48px; }
+  #track-label { bottom: 100px; }
+}
+
+/* ================================
+   SAFE AREA — iOS Safari bottom bar
+================================ */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  #player-area {
+    bottom: calc(48px + env(safe-area-inset-bottom));
+  }
+  #track-label {
+    bottom: calc(100px + env(safe-area-inset-bottom));
+  }
+}
