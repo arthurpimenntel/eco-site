@@ -65,19 +65,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const isMobile = window.innerWidth <= 680;
 
   const videosMobile = [
-    { url: "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774578883/celular1_n0kcp3.mp4", start: 6,  end: 14 },
-    { url: "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774578891/celular2_xg4rhq.mp4", start: 22, end: 30 },
-    { url: "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774578895/celular3_w4hcez.mp4", start: 28, end: 36 },
-    { url: "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774578919/celular4_br5dtm.mp4", start: 10, end: 18 }
+    { url: "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/celular1.mp4", start: 6,  end: 14 },
+    { url: "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/celular2.mp4", start: 22, end: 30 },
+    { url: "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/celular3.mp4", start: 28, end: 36 },
+    { url: "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/celular4.mp4", start: 10, end: 18 },
+    { url: "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/celular5.mp4", start: 6,  end: 14 }
   ];
 
   const videosDesktop = [
-    { url: "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774578949/computador1_romcac.mp4", start: 0,  end: 8  },
-    { url: "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774578963/computador2_hf6j30.mp4", start: 5,  end: 13 },
-    { url: "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774578966/computador3_jgintj.mp4", start: 6,  end: 14 },
-    { url: "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774578975/computador4_xq731e.mp4", start: 8,  end: 16 },
-    { url: "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774578991/computador5_fkbjks.mp4", start: 7,  end: 15 },
-    { url: "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774578984/computador6_dievem.mp4", start: 12, end: 20 }
+    { url: "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/computador1.mp4", start: 0,  end: 8  },
+    { url: "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/computador2.mp4", start: 5,  end: 13 },
+    { url: "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/computador3.mp4", start: 6,  end: 14 },
+    { url: "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/computador4.mp4", start: 8,  end: 16 },
+    { url: "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/computador5.mp4", start: 7,  end: 15 },
+    { url: "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/computador6.mp4", start: 12, end: 20 }
   ];
 
   const videoPlaylist = isMobile ? videosMobile : videosDesktop;
@@ -201,16 +202,16 @@ const trackNames = [
 ];
 
 const musicPlaylist = [
-  "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774485545/track1_tyro94.mp3",
-  "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774485547/track2_qhbksp.mp3",
-  "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774485552/track4_xskryp.mp3",
-  "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774485549/track6_db06dq.mp3",
-  "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774485552/track5_xbfxmv.mp3",
-  "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774485554/track7_dnhirt.mp3",
-  "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774485553/track3_hqs7rn.mp3",
-  "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774485555/track8_gmrwri.mp3",
-  "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774485587/track9_zkwson.mp3",
-  "https://res.cloudinary.com/dxnxytrkc/video/upload/v1774485589/track10_afdfub.mp3"
+  "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/track1.mp3",
+  "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/track2.mp3",
+  "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/track4.mp3",
+  "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/track6.mp3",
+  "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/track5.mp3",
+  "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/track7.mp3",
+  "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/track3.mp3",
+  "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/track8.mp3",
+  "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/track9.mp3",
+  "https://pub-ace4920a519b43c8abf30a01ee0935be.r2.dev/track10.mp3"
 ];
 
 const audio      = document.getElementById("audio-player");
