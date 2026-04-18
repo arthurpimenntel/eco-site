@@ -37,7 +37,7 @@ setInterval(() => {
 
   if (diff <= 0) {
     document.getElementById("countdown").innerHTML =
-      "<span style='color:var(--green);font-family:Orbitron,sans-serif;font-size:1.2rem;letter-spacing:0.1em'>O FESTIVAL COMEÇA HOJE! 🌿</span>";
+      "<span style='color:var(--green);font-family:Orbitron,sans-serif;font-size:1.2rem;letter-spacing:0.1em'>Hoje. Recife. Sua tribo🌿</span>";
     return;
   }
 
